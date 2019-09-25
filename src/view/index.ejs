@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quake Log Parser</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="/css/jquery.json-viewer.css">
+  <link rel="stylesheet" type="text/css" href="/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+  <script src="/js/jquery.js"></script>
+  <script src="/js/jquery.json-viewer.js"></script>
+  <script src="/js/materialize.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <!-- Título -->
+  <h4 id="title">Selecione o arquivo games.log: </h4>
+
+
+  <!-- Form de envio do arquivo -->
+  <form id="formFile" action="/" enctype="multipart/form-data" method="POST">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" name="uploadFile">
+      </div>
+      <div class="file-path-wrapper">
+        <input id="file-name" class="file-path validate" type="text">
+        <span class="helper-text">O botão habilitará somente se o arquivo for o games.log</span>
+      </div>
+    </div>
+    <button id="btn-submit" class="btn waves-effect waves-light btn-block" type="submit" name="action">Enviar</button>
+  </form>
+  <!-- -->
+
+  <!-- Div de vizualização -->
+  <div id="div-vizualizacao">
+    <h5>Cada objeto representa uma partida</h5>
+    <!-- Div que receberá o objeto JSON processado -->
+    <pre id="json-viewer"></pre>
+  </div>
+  <!-- --->
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
