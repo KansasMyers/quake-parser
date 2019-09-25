@@ -11,6 +11,8 @@ O processamento é feito através WebService construído em Node e Express que r
 
 # Rodando o projeto
 
+<b>Requerimentos:</b> Node >= 12.0.0 
+
 ## Instale as depêndencias
 ```console
 kansas@myers:~$ npm install

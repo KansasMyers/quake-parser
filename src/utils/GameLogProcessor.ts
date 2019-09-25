@@ -3,7 +3,7 @@ import Player from "../models/Player";
 import Weapon from "../models/Weapon";
 import Constants from "./Constants";
 
-import * as fs from "fs";
+import * as write from 'write';
 import * as lineReader from "line-reader";
 
 class GameLogProcessor {
@@ -83,7 +83,7 @@ class GameLogProcessor {
         } // Se for a última linha
         else if (last) {
           games.push(atualGame);
-          this.createGamesFile(games);
+          await GameLogProcessor.createGamesFile(filePath, games);
         }
       }
     );
@@ -92,15 +92,11 @@ class GameLogProcessor {
   /**
    * @description Recebe o Array de Games completo e fica responsável por criar o seu arquivo .json no disco
    */
-  createGamesFile(filePath: string, arrGames: Array<Game>) {
+  static async createGamesFile(filePath: string, arrGames: Array<Game>) {
     let gamesPath: string = `${filePath}\\output\\games.json`;
     let content: string = JSON.stringify(arrGames, ["game", "totalKills", "players", "killsByMean", "name", "kills"], 2);
 
-    fs.writeFile(gamesPath, content, err => {
-      if (err) throw err;
-
-      console.log(`O arquivo processado foi salvo em: ${gamesPath}`);
-    });
+    await write(gamesPath, content);
   }
 
 }
