@@ -54,7 +54,8 @@ $(document).ready(function() {
     event.preventDefault();
     event.stopPropagation();
 
-    $(btnSubmit).prop("disabled", true);
+    $(this).prop("disabled", true);
+    $(this).text("Enviando Arquivo...");
 
     var form = $(formFile)[0];
     var data = new FormData(form);
@@ -72,13 +73,13 @@ $(document).ready(function() {
       success: function() {
         // Chama a requisição de processar o arquivo
         processFile();
+        $(this).text("Processando Arquivo...");
       },
       // Manipular erros da requisição
       error: function() {
         alert("Houve um erro ao realizar sua requisição! Tente novamente.");
-
-        // Reativar o botão de "submit"
-        $(btnSubmit).prop("disabled", false);
+        
+        location.reload();
       }
     });
   });

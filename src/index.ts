@@ -5,6 +5,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import * as openurl from 'openurl';
+import * as fs from 'fs';
+import * as sleep from 'await-sleep';
 
 const filePath: string = `${__dirname}\\files\\`;
 
@@ -35,7 +37,14 @@ app.get('/', (req, res) => {
 // POST - Rota para iniciar o processamento do arquivo games.log e enviar o arquivo processado games.json como retorno
 app.post('/process', async (req, res) => {
   await GameLogProcessor.processFile(filePath);
-  res.sendFile(`${filePath}\\output\\games.json`);
+  let gamesPath: string = `${filePath}\\output\\games.json`;
+  
+  // Só irá liberar a request se o arquivo tiver sido criado
+  while (!fs.existsSync(gamesPath)) {
+    await sleep(250);
+  }
+
+  res.sendFile(gamesPath);
 });
 
 // POST - Rota responsável por salvar o arquivo
